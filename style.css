@@ -28,6 +28,7 @@ body{
     width:260px;
     background:rgba(255,255,255,0.06);
     backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px); /* compatibilidade */
     padding:20px;
     border-right:3px solid var(--rosa);
     display:flex;
@@ -45,6 +46,13 @@ body{
     filter:drop-shadow(0 0 15px var(--rosa));
 }
 
+/* garante que imagens não quebrem layout */
+img{
+    max-width:100%;
+    height:auto;
+}
+
+/* TITULO */
 .sidebar h2{
     text-align:center;
     margin-bottom:25px;
@@ -71,6 +79,12 @@ body{
     border-color:var(--rosa);
     box-shadow:0 0 15px var(--rosa);
     transform:translateX(4px);
+}
+
+.sidebar button.active-btn{
+    background:var(--rosa);
+    border-color:var(--rosa);
+    box-shadow:0 0 15px var(--rosa);
 }
 
 /* CONTENT */
@@ -254,6 +268,10 @@ input{
     outline:none;
 }
 
+input::placeholder{
+    color:rgba(255,255,255,0.5);
+}
+
 input:focus{
     border-color:var(--rosa);
     box-shadow:0 0 15px var(--rosa);
@@ -289,10 +307,21 @@ body.dark .stat-card,
 body.dark .activity-panel,
 body.dark .card{
     background:rgba(255,255,255,0.04);
-    
 }
-.sidebar button.active-btn{
-    background:var(--rosa);
-    border-color:var(--rosa);
-    box-shadow:0 0 15px var(--rosa);
+
+/* RESPONSIVO (IMPORTANTE) */
+@media(max-width:900px){
+    body{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        flex-direction:row;
+        overflow-x:auto;
+    }
+
+    .content{
+        padding:20px;
+    }
 }
