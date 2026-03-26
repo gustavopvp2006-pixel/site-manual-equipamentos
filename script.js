@@ -20,9 +20,10 @@ function showSection(id){
         target.classList.add("active");
     }
 
-    // Ativa botão selecionado
+    // Ativa botão selecionado corretamente
     buttons.forEach(btn => {
-        if(btn.getAttribute("onclick")?.includes(id)){
+        const onclick = btn.getAttribute("onclick");
+        if(onclick && onclick.includes(id)){
             btn.classList.add("active-btn");
         }
     });
@@ -45,13 +46,12 @@ function atualizarContadores(){
         contadorGeral.innerText = totalManuais;
     }
 
-    // Atualiza automaticamente números do dashboard se existirem
     const dashboardCards = document.querySelectorAll(".stat-card h3");
 
-    dashboardCards.forEach(card => {
-        if(card.innerText === "9") card.innerText = totalRoteadores;
-        if(card.innerText === "4") card.innerText = totalSistemas;
-    });
+    if(dashboardCards.length >= 3){
+        dashboardCards[1].innerText = totalRoteadores;
+        dashboardCards[2].innerText = totalSistemas;
+    }
 
 }
 
@@ -75,7 +75,7 @@ function ativarBusca(){
             const texto = card.innerText.toLowerCase();
 
             if(texto.includes(valor)){
-                card.style.display = "block";
+                card.style.display = "";
             } else {
                 card.style.display = "none";
             }
